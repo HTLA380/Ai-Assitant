@@ -7,7 +7,7 @@ export async function GET(): Promise<
   NextResponse<ApiResponse<{ user: User }>>
 > {
   try {
-    const response = await api.get("/auth/me");
+    const response = await api.get<User>("/auth/me");
 
     return NextResponse.json({ data: { user: response.data } });
   } catch (error: any) {

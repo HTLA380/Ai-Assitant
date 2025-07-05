@@ -4,6 +4,7 @@ export type User = {
   email: string;
   gender: string;
   image: string;
+  role: string;
 };
 
 export type AuthResponse = {

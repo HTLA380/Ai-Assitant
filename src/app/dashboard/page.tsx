@@ -1,24 +1,10 @@
 "use client";
 
 import { useAuthStore } from "@/features/auth/stores/auth-store-provider";
-import { useEffect } from "react";
+import Image from "next/image";
 
 const DashboardPage = () => {
-  const { user, isLoading, getMe } = useAuthStore((state) => state);
-
-  useEffect(() => {
-    if (!user) {
-      getMe();
-    }
-  }, [user, getMe]);
-
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p>Loading...</p>
-      </div>
-    );
-  }
+  const { user } = useAuthStore((state) => state);
 
   if (!user) {
     return (
@@ -36,14 +22,16 @@ const DashboardPage = () => {
         </h1>
         <div className="space-y-4">
           <div className="flex items-center space-x-4">
-            <img
-              src={user.avatar || `https://avatar.vercel.sh/${user.email}`}
+            <Image
+              width={40}
+              height={40}
+              src={user.image}
               alt="User Avatar"
-              className="h-20 w-20 rounded-full"
+              className="size-20 rounded-full"
             />
             <div>
               <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
-                {user.name}
+                {user.username}
               </h2>
               <p className="text-md text-gray-600 dark:text-gray-400">
                 {user.email}
